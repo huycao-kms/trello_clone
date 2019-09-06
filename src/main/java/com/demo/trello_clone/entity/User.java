@@ -21,8 +21,7 @@ public class User {
     private String name;
     private String username;
     private String password;
-
-
+    
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Board> boards;

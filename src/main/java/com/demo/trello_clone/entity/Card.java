@@ -1,13 +1,17 @@
 package com.demo.trello_clone.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "cards")
 public class Card {
     @Id
@@ -23,11 +27,14 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "list_id")
+    @JsonIgnore
     private List list;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "card", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<CardMember> cardMembers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "card", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<CheckList> checkLists;
 }
