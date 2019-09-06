@@ -8,19 +8,19 @@ CREATE TABLE users (
 CREATE TABLE boards (
    id SERIAL PRIMARY KEY,
    name VARCHAR(50),
-   owner_id integer REFERENCES users (id)
+   owner_id integer NOT NULL REFERENCES users (id)
 );
 
 CREATE TABLE board_members (
    id SERIAL PRIMARY KEY,
-   board_id integer REFERENCES boards (id),
-   member_id integer REFERENCES users (id)
+   board_id integer NOT NULL REFERENCES boards (id),
+   member_id integer NOT NULL REFERENCES users (id)
 );
 
 CREATE TABLE lists (
    id SERIAL PRIMARY KEY,
    name VARCHAR(50),
-   board_id integer REFERENCES boards (id)
+   board_id integer NOT NULL REFERENCES boards (id)
 );
 
 CREATE TABLE cards (
@@ -28,23 +28,23 @@ CREATE TABLE cards (
    name VARCHAR(50),
    due_date DATE,
    description VARCHAR(200),
-   card_id integer REFERENCES cards (id)
+   list_id integer NOT NULL REFERENCES lists (id)
 );
 
 CREATE TABLE card_members (
    id SERIAL PRIMARY KEY,
-   card_id integer REFERENCES cards (id),
-   member_id integer REFERENCES users (id)
+   card_id integer NOT NULL REFERENCES cards (id),
+   member_id integer NOT NULL REFERENCES users (id)
 );
 
 CREATE TABLE checklists (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
-    card_id integer REFERENCES cards (id)
+    card_id integer NOT NULL REFERENCES cards (id)
 );
 
 CREATE TABLE checklist_items(
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
-    checklist_id integer REFERENCES checklists (id)
+    checklist_id integer NOT NULL REFERENCES checklists (id)
 );
