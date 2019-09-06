@@ -1,4 +1,9 @@
 package com.demo.trello_clone.repository;
 
-public interface CardMemberRepository {
+import com.demo.trello_clone.entity.CardMember;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CardMemberRepository extends JpaRepository<CardMember, Integer> {
 }
