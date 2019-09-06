@@ -7,8 +7,8 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "lists")
-public class List {
+@Table(name = "checklists")
+public class CheckList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
@@ -16,9 +16,9 @@ public class List {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "board_id")
-    private Board board;
+    @JoinColumn(name = "card_id")
+    private Card card;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "list", cascade = CascadeType.ALL)
-    private Set<Card> cards;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "checkList", cascade = CascadeType.ALL)
+    private Set<CheckListItem> checkListItems;
 }
