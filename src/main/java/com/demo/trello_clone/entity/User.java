@@ -7,15 +7,18 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "boards")
-public class Board {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     private String name;
+    private String username;
+    private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Board> boards;
+
 }
